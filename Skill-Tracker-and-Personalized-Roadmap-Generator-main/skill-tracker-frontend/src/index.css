@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* ScrollStack specific styles */
+.scroll-stack-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, filter;
+  contain: layout style paint;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.scroll-stack-inner {
+  perspective: 1000px;
+  contain: layout style;
+}
+
+/* Ensure smooth scrolling for ScrollStack */
+html {
+  scroll-behavior: auto; /* Let Lenis handle smooth scrolling */
+}
+
+/* Prevent scroll chaining issues */
+.scroll-stack-container {
+  overscroll-behavior: contain;
+}
+
+/* Optimize animations for better performance */
+.scroll-stack-card * {
+  will-change: auto;
+}
+
+/* Ensure proper stacking context */
+.scroll-stack-card {
+  isolation: isolate;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-stack-card {
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* Ensure proper viewport handling */
+#root {
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Define the gradient shift animation */
+@keyframes gradient-shift-subtle {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Apply the animation */
+.animate-gradient-shift-subtle {
+  background-size: 400% 400%; /* Make the gradient larger than the viewport */
+  animation: gradient-shift-subtle 15s ease infinite; /* Adjust time for speed */
+}
+
+/* In your global CSS */
+:root {
+  --sidebar-width: 240px; /* will be overridden by the component */
+}
+
+/* Example: main content wrapper */
+.main-content {
+  transition: padding-left 180ms ease;
+  padding-left: var(--sidebar-width);
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradientMove {
+  animation: gradientMove 12s ease infinite;
+}
+
+/* Add to your global CSS file */
+.problem-overlap-section {
+  box-shadow: 0 -40px 80px -40px #070030;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
